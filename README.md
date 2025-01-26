@@ -3,14 +3,6 @@
 This repository contains Python Jupyter Notebook scripts used for data extraction, processing, and analysis in the research paper:  
 **[Unveiling Behavioral Transparency of Protocols Communicated by IoT Networked Assets](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I6kUmVIAAAAJ&citation_for_view=I6kUmVIAAAAJ:2osOgNQ5qMEC)**
 
-## Overview
-
-The scripts in this repository are structured as follows:
-
-- **Data Extraction**: Scripts to parse and extract data from raw IoT network traffic.
-- **Data Processing**: Functions for cleaning, transforming, and organizing the extracted data for further analysis.
-- **Data Analysis**: Code for statistical modeling, visualization, and deriving insights from the processed data.
-
 These scripts were developed as part of the study to understand behavioral transparency in IoT network communications and their associated protocols.
 
 ## Important Note
