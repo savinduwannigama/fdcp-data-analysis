@@ -7,4 +7,4 @@ These scripts were developed as part of the study to understand behavioral trans
 
 ## Important Note
 
-The dataset used by these scripts is not included in this repository due to storage limitations, as the files are too large to host here. If you would like to reproduce the analysis, you will need to obtain the necessary data files independently. Please contact the corresponding author of the paper for guidance on accessing the dataset.
+The data loaded used by these scripts are not included in this repository due to storage limitations, as the files are too large to host here. If you would like to reproduce the analysis, you will need to obtain the necessary data files independently. Please contact the corresponding author of the paper for guidance on accessing the dataset.
