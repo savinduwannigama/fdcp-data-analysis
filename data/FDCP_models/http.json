@@ -1,0 +1,225 @@
+{
+  "fpd:info": {
+    "fpd-version": 1,
+    "last-update": "2022-10-14",
+    "fpd-namespace": "fpd:cyamast:http",
+    "abbreviation": "http",
+    "standard-name": "hypertext transfer protocol",
+    "description": "transmit hypermedia documents",
+    "protocol-url": "https://datatracker.ietf.org/doc/html/rfc2616"
+  },
+  "fpd:metadata": {
+    "ether-types": [
+      "0x0800",
+      "0x86DD"
+    ],
+    "ip-protocols": [
+      6
+    ],
+    "server-port": {
+      "port": [
+        80
+      ]
+    },
+    "traffic-mode": ["UNICAST"],
+    "network-scope": [
+      "REMOTE",
+      "LOCAL"
+    ],
+    "content-class": [
+      "PLAIN_TEXT",
+      "ENCODED",
+      "ENCRYPTED"
+    ],
+    "relationship": ["BI_DIRECTION"]
+  },
+  "fpd:contents": {
+    "request": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:regex",
+          "matcher-pattern": {
+            "pattern": "(OPTIONS|GET|HEAD|POST|NOTIFY|SUBSCRIBE|PUT|DELETE|TRACE|CONNECT).*HTTP/1.(1|0)\\x0d\\x0a"
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "response": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:regex",
+          "matcher-pattern": {
+            "pattern": "HTTP/(0.9|1.0|1.1) [1-5]0.*\\x0d\\x0a"
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "protocol": "request & response"
+  },
+  "fpd:attributes": [
+    {
+      "name": "user-agent",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(user-agent: )))(.*?)(?=\\x0d\\x0a)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "user-agent",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(User-Agent: )))(.*?)(?=\\x0d\\x0a)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "method",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|SUBSCRIBE|NOTIFY)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "uri",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|SUBSCRIBE|NOTIFY)(.+?)(\\x20)",
+        "group": 2
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "request-version",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "HTTP/(0.9|1.0|1.1)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "server",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(server: )))(.*?)(?=\\x0d\\x0a)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "response-version",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "HTTP/(0.9|1.0|1.1)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "status code",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=HTTP\/(0.9|1.0|1.1)\\x20)(.*?)(?=\\x20)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "response phrase",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=HTTP\/(0.9|1.0|1.1)\\x20[1-5][0-9][0-9]\\x20).*?(?=\\x0d\\x0a)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "authentication_type",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(authorization: )))(.*?)(?=\\x20)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "authentication_credential",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(authorization: ))).*?\\x20(.*?)\\x0d\\x0a",
+        "group": 3
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "soap_security_tag",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "<Security(.*?)<\/Security>",
+        "group": 0
+      },
+      "data-type": "string",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "wsse_security_tag",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "<wsse:Security(.*?)<\/wsse:Security>",
+        "group": 0
+      },
+      "data-type": "string",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "host",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "(?<=((?i)(host: )))(.*?)(?=\\x0d\\x0a)",
+        "group": 0
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "security_tag",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "<Security(.*?)<\/Security>",
+        "group": 0
+      },
+      "data-type": "string",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "wsse_security_tag",
+      "parser-type": "fpd:parser:regex",
+      "parser-pattern": {
+        "pattern": "<wsse:Security(.*?)<\/wsse:Security>",
+        "group": 0
+      },
+      "data-type": "string",
+      "direction": "REQUEST"
+    }
+  ]
+}

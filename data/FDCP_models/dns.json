@@ -1,0 +1,127 @@
+{
+  "fpd:info": {
+    "fpd-version": 1,
+    "last-update": "2022-12-01",
+    "fpd-namespace": "fpd:cyamast:dns",
+    "abbreviation": "dns",
+    "standard-name": "domain name system",
+    "description": "domain name resolve",
+    "protocol-url": "https://www.rfc-editor.org/rfc/rfc1035"
+  },
+  "fpd:metadata": {
+    "ether-types": [
+      "0x0800",
+      "0x86DD"
+    ],
+    "ip-protocols": [
+      17
+    ],
+    "server-port": {
+      "port": [
+        53
+      ]
+    },
+    "traffic-mode": ["UNICAST"],
+    "network-scope": [
+      "REMOTE",
+      "LOCAL"
+    ],
+    "content-class": [
+      "PLAIN_TEXT",
+      "ENCODED",
+      "ENCRYPTED"
+    ],
+    "relationship": ["BI_DIRECTION"]
+  },
+  "fpd:contents": {
+    "request": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "00-ff 00-ff (00|01|02|03|08|09|0a|0b|10|11|12|13) 00-70 00 (01|02) 00 00 00 00 00 00 01-3f",
+			"index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "response": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "00-ff 00-ff (82|84|86|88|8a|8c|8e|92|94|96|98|9a|9c|9e) (00-75|80-f5) 00 01-ff 00 01-ff 00 00-ff 00 00-ff",
+			"index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "protocol": "request | response"
+  },
+  "fpd:attributes": [
+    {
+      "name": "transaction id",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "2"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "transaction id",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "2"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "flags",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "2",
+        "to": "4"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "flags",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "2",
+        "to": "4"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "Qnumber",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "4",
+        "to": "6"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "Qnumber",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "4",
+        "to": "6"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    }
+  ]
+}

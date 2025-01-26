@@ -1,0 +1,155 @@
+{
+  "fpd:info": {
+    "fpd-version": 1,
+    "last-update": "2022-10-25",
+    "fpd-namespace": "fpd:cyamast:ntp",
+    "abbreviation": "ntp",
+    "standard-name": "network time protocol",
+    "description": "time synchronisation",
+    "protocol-url": "https://www.rfc-editor.org/rfc/rfc5905.html"
+  },
+  "fpd:metadata": {
+    "ether-types": [
+      "0x0800",
+      "0x86DD"
+    ],
+    "ip-protocols": [
+      17
+    ],
+    "server-port": {
+      "port": [
+        123
+      ]
+    },
+    "traffic-mode": ["UNICAST","BROADCAST","MULTICAST"],
+    "network-scope": [
+      "REMOTE",
+      "LOCAL"
+    ],
+    "content-class": [
+      "PLAIN_TEXT"
+    ],
+    "relationship": ["BI_DIRECTION"]
+  },
+  "fpd:contents": {
+    "request": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "(21|23|25|19|1b|1d|61|63|65|59|5b|5d|a1|a3|a5|99|9b|9d|e1|e3|e5|d9|db|dd) 00-10 .......... 00 00 00 00 ...............................",
+			"index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "response": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "(22|24|1a|1c|62|64|5a|5c|a2|a4|9a|9c|e2|e4|da|dc) 00-10 .............................................",
+			"index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "protocol": "request & response"
+  },
+  "fpd:attributes": [
+    {
+      "name": "client version",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "server version",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "client mode",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "server mode",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "origin timestamp",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "24",
+        "to": "32"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "origin timestamp",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "24",
+        "to": "32"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "transmit timestamp",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "40",
+        "to": "48"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+	{
+      "name": "transmit timestamp",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "40",
+        "to": "48"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+	{
+      "name": "reference id",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "12",
+        "to": "16"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    }
+  ]
+}

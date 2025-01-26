@@ -1,0 +1,5 @@
+MUDFlow,Using_Devices
+ipv4-2-*,'amazonEcho' | 'tplinkcamera' | 'withingssleepsensor'
+ipv4-1-*,'amazonEcho'
+ipv6-58-*,'lifxbulb' | 'nestsmokesensor' | 'pixstarphotoframe' | 'tribyspeaker'
+ipv6-0-*,'nestsmokesensor' | 'pixstarphotoframe' | 'tribyspeaker'

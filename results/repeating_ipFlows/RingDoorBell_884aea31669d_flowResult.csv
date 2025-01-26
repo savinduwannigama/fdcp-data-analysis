@@ -1,0 +1,1 @@
+ srcIp, dstIp, ipProto, srcPort, dstPort,srcMac, dstMac, ethType, protocol

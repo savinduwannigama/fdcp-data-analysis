@@ -1,0 +1,8 @@
+|SamsungCamera|WithingsBabyMonitor
+tls|{'client-hello-extensions': {'000b000403000102000a00340032000e000d0019000b000c00180009000a00160017000800060007001400150004000500120013000100020003000f0010001100230000000f000101': 65}, 'client-hello-cipher-suites': {'c014c00ac022c0210039003800880087c019c020c00fc00500350084c012c008c01cc01b00160013c017c01ac00dc003000ac013c009c01fc01e00330032009a009900450044c018c01dc00ec004002f00960041c011c007c016c00cc002000500ff': 65}, 'client-hello-version,,': {'0301,,': 65}, 'number_of_unique_flows': 65}|
+dns||{'number_of_unique_flows': 65}
+rtmp||{'number_of_unique_flows': 65}
+dhcp||{'number_of_unique_flows': 65}
+icmp||{'number_of_unique_flows': 65}
+mdns||{'number_of_unique_flows': 65}
+http||{'number_of_unique_flows': 65}

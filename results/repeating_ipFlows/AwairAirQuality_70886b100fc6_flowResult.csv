@@ -1,0 +1,2 @@
+ srcIp, dstIp, ipProto, srcPort, dstPort,srcMac, dstMac, ethType, protocol
+192.168.1.152,52.43.214.158,6,41391,8883,0,0,2,2

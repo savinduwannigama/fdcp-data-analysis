@@ -1,0 +1,8 @@
+|SamsungCamera|WithingsBabyMonitor
+tls|{'server-hello-cipher-suite': {'c013': 65}, 'server-hello-version,,': {'0301,,': 65}, 'number_of_unique_flows': 65}|
+dns||{'number_of_unique_flows': 65}
+rtmp||{'number_of_unique_flows': 65}
+dhcp||{'number_of_unique_flows': 65}
+icmp||{'number_of_unique_flows': 65}
+mdns||{'number_of_unique_flows': 65}
+http||{'number_of_unique_flows': 65}

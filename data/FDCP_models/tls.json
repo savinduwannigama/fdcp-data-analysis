@@ -1,0 +1,132 @@
+{
+  "fpd:info": {
+    "fpd-version": 1,
+    "last-update": "2022-10-17",
+    "fpd-namespace": "fpd:cyamast:tls",
+    "abbreviation": "tls",
+    "standard-name": "transport layer security",
+    "description": "provides communications security over the internet",
+    "protocol-url": "https://datatracker.ietf.org/doc/html/rfc5246"
+  },
+  "fpd:metadata": {
+    "ether-types": [
+      "0x0800",
+      "0x86DD"
+    ],
+    "ip-protocols": [
+      6
+    ],
+    "server-port": {
+      "port": [
+        443
+      ]
+    },
+    "traffic-mode": ["UNICAST"],
+    "network-scope": [
+      "REMOTE",
+      "LOCAL"
+    ],
+    "content-class": [
+      "PLAIN_TEXT",
+      "ENCRYPTED"
+    ],
+    "relationship": ["BI_DIRECTION"]
+  },
+  "fpd:contents": {
+    "request": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "(14|15|16|17|18|19|20) 03 (00|01|02|03) 00-40 00-ff 01",
+            "index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "response": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "(14|15|16|17|18|19|20) 03 (00|01|02|03) 00-40 00-ff 02",
+            "index": 0
+          }
+        }
+      ],
+      "eval": "1"
+    },
+    "protocol": "request & response"
+  },
+  "fpd:attributes": [
+    {
+      "name": "client-hello-cipher-suites",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 01",
+        "from": "46 + $(43)",
+        "to": "from + (($(from - 2) < 8) | ($(from - 1)))"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "client-hello-version",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 01",
+        "from": "9",
+        "to": "11"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "client-hello-extensions",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 01",
+        "from": "46 + $(43) + ($(44 + $(43)) < 8) | ($(45 + $(43))) + $(46 + $(43) + ($(44 + $(43)) < 8) | ($(45 + $(43)))) + 3",
+        "to": "from + (($(from - 2) < 8) | ($(from - 1)))"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "server-hello-cipher-suite",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 02",
+        "from": "44 + $(43)",
+        "to": "from + 2"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "server-hello-version",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 02",
+        "from": "9",
+        "to": "11"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "server-hello-certificates",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "seek-pattern-from": "16 03 (00|01|02|03) 00-40 00-ff 0b",
+        "from": "12",
+        "to": "12 + (($(9) < 16) | ($(10) < 8) | $(11))"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    }
+  ]
+}

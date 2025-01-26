@@ -1,0 +1,3 @@
+MUDFlow,Using_Devices
+ethernet-0x0006,'amazonEcho' | 'awairAirQuality' | 'lifxbulb' | 'nestsmokesensor' | 'pixstarphotoframe' | 'ringdoorbell' | 'tplinkcamera' | 'tribyspeaker' | 'samsungsmartcam'
+ethernet-0x888e,'amazonEcho' | 'awairAirQuality' | 'lifxbulb' | 'nestsmokesensor' | 'pixstarphotoframe' | 'ringdoorbell' | 'tplinkcamera' | 'tribyspeaker' | 'withingssleepsensor' | 'samsungsmartcam'

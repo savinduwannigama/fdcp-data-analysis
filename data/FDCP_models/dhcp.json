@@ -1,0 +1,381 @@
+{
+  "fpd:info": {
+    "fpd-version": 1,
+    "last-update": "2022-12-01",
+    "fpd-namespace": "fpd:cyamast:dhcp",
+    "abbreviation": "dhcp",
+    "standard-name": "dynamic host configuration protocol",
+    "description": "provides configuration parameters to internet hosts",
+    "protocol-url": "https://datatracker.ietf.org/doc/html/rfc2131"
+  },
+  "fpd:metadata": {
+    "ether-types": [
+      "0x0800",
+      "0x86DD"
+    ],
+    "ip-protocols": [
+      17
+    ],
+    "server-port": {
+      "port": [
+        67
+      ]
+    },
+    "traffic-mode": ["UNICAST","BROADCAST"],
+    "network-scope": [
+      "LOCAL"
+    ],
+    "content-class": [
+      "PLAIN_TEXT",
+      "ENCODED"
+    ],
+    "relationship": ["BI_DIRECTION"]
+  },
+  "fpd:contents": {
+    "request": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "63 82 53 63"
+          }
+        },
+        {
+          "id": 2,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "index": 0,
+            "pattern": "01"
+          }
+        }
+      ],
+      "eval": "1 & 2"
+    },
+    "response": {
+      "matchers": [
+        {
+          "id": 1,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "pattern": "63 82 53 63"
+          }
+        },
+        {
+          "id": 2,
+          "matcher-type": "fpd:matcher:byteseek",
+          "matcher-pattern": {
+            "index": 0,
+            "pattern": "02"
+          }
+        }
+      ],
+      "eval": "1 & 2"
+    },
+    "protocol": "request | response"
+  },
+  "fpd:attributes": [
+    {
+      "name": "opcode",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "opcode",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "0",
+        "to": "1"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "htype",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "1",
+        "to": "2"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "htype",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "1",
+        "to": "2"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "hlen",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "2",
+        "to": "3"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "hlen",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "2",
+        "to": "3"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "hops",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "3",
+        "to": "4"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "hops",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "3",
+        "to": "4"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "xid",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "4",
+        "to": "8"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "xid",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "4",
+        "to": "8"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "secs",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "8",
+        "to": "10"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "flags",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "10",
+        "to": "12"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "flags",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "10",
+        "to": "12"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "ciaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "12",
+        "to": "16"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "ciaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "12",
+        "to": "16"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "yiaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "16",
+        "to": "20"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "yiaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "16",
+        "to": "20"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "siaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "20",
+        "to": "24"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "siaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "20",
+        "to": "24"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "giaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "24",
+        "to": "28"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "giaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "24",
+        "to": "28"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "chaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "28",
+        "to": "from + $(2)"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "chaddr",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "28",
+        "to": "from + $(2)"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "sname",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "44",
+        "to": "108"
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "sname",
+      "parser-type": "fpd:parser:byteseek:range",
+      "parser-pattern": {
+        "from": "44",
+        "to": "108"
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "host name",
+      "parser-type": "fpd:parser:byteseek:tlv",
+      "parser-pattern": {
+        "seek-pattern": "63 82 53 63",
+        "tag-pattern" : "0c [00 - 0E]",
+        "tag-bit-length" : 8,
+        "length-bit-length" : 8,
+        "find-all" : false
+      },
+      "data-type": "STRING",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "vendor class identifier",
+      "parser-type": "fpd:parser:byteseek:tlv",
+      "parser-pattern": {
+        "seek-pattern": "63 82 53 63",
+        "tag-pattern" : "3c [00 - 0E]",
+        "tag-bit-length" : 8,
+        "length-bit-length" : 8,
+        "find-all" : false
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    },
+    {
+      "name": "ip lease time",
+      "parser-type": "fpd:parser:byteseek:tlv",
+      "parser-pattern": {
+        "seek-pattern": "63 82 53 63",
+        "tag-pattern" : "33 [00 - FF]",
+        "tag-bit-length" : 8,
+        "length-bit-length" : 8,
+        "find-all" : false
+      },
+      "data-type": "BYTES",
+      "direction": "RESPONSE"
+    },
+    {
+      "name": "parameter request list",
+      "parser-type": "fpd:parser:byteseek:tlv",
+      "parser-pattern": {
+        "seek-pattern": "63 82 53 63",
+        "tag-pattern" : "37 [00 - 0A]",
+        "tag-bit-length" : 8,
+        "length-bit-length" : 8,
+        "find-all" : false
+      },
+      "data-type": "BYTES",
+      "direction": "REQUEST"
+    }
+  ]
+}
